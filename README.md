@@ -5,5 +5,6 @@
 - npm
 
 ## Run
+- rename 'example.env' to '.env'
 - npm i
 - node src/gradeAssignment.js
