@@ -1,0 +1,58 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@400;700&family=Oxygen:wght@400;700&display=swap'
+      rel='stylesheet'
+    />
+    <style>
+      * { font-family: 'Open Sans', Helvetica, sans-serif; font-weight: 400; line-height: 140%;
+      box-sizing: border-box; } h1 { font-weight: 700; } b { font-weight: 700; } table {
+      border-collapse: collapse; width: 50%; margin: 20px auto; text-align: center; } th, td {
+      border: 1px solid #dddddd; padding: 8px; } th { background-color: #f2f2f2; }
+    </style>
+  </head>
+  <body>
+    <h1>Witaj {{student.firstname}} {{student.lastname}}</h1>
+    <p>
+      System monitorujący postępy studentów w ostatnim czasie wykrył
+      <b>{{grades.trend}}</b>
+      tend poziomu ocen otrzymayuch w ramach przedmoitu
+      <b>{{grades.subject}}</b>.
+    </p>
+    <table>
+      <tr>
+        <th>Oceny:</th>
+
+        {{#each grades.grades}}
+          <td>{{this}}</td>
+        {{/each}}
+      </tr>
+    </table>
+    <p>
+      Twoje osiągnięcia akademickie mają istotny wpływ na Twoją przyszłość. Dlatego warto zastanowić
+      się, jakie działania możesz podjąć, aby odwrócić ten trend. Rozważ dostosowanie swojej
+      strategii uczenia się, efektywne planowanie czasu oraz wykorzystanie dostępnych zasobów,
+      takich jak korepetycje czy wsparcie kolegów.
+    </p>
+    <p>
+      Jeśli potrzebujesz wskazówek lub pomocy, pamiętaj, że Twój Promotor jest tu, by Cię wesprzeć.
+      Możecie wspólnie omówić techniki uczenia się, które mogą Ci pomóc osiągnąć lepsze wyniki.
+      Pamiętaj, że Twoje zaangażowanie i wysiłek teraz będą mieć wpływ na Twoje przyszłe możliwości.
+    </p>
+    <p>
+      Nie jesteś sam/a w tej podróży. Wszyscy tutaj w społeczności akademickiej chcą Ci pomóc
+      osiągnąć sukces. Pamiętaj, że każdy krok w kierunku poprawy ma znaczenie.
+    </p>
+    <p>
+      Zachęcamy Cię do podjęcia działań naprawczych i do działania w celu osiągnięcia lepszych
+      rezultatów. Razem możemy pracować nad poprawą Twoich wyników.
+    </p>
+    <br />
+    <p>Pozdrawiamy<br />Uniwersytet WSB Merito</p>
+  </body>
+</html>
