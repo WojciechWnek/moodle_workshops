@@ -48,7 +48,7 @@ const assignGradesToStudents = async (coursesUsers) => {
           if (!res.usergrades) return { ...user, grades: null };
           const grades = res.usergrades[0].gradeitems
             .filter((grade) => grade.itemtype !== 'course')
-            .map((grade) => grade.graderaw / grade.grademax);
+            .map((grade) => grade.gradeformatted);
           return {
             ...user,
             grades: grades,
@@ -62,10 +62,50 @@ const assignGradesToStudents = async (coursesUsers) => {
 };
 
 const gradesReport = async () => {
-  const courses = await getCousresIds('Seminarium Magisterskie');
+  const courses = await getCousresIds('Seminarium_1');
   const coursesUsers = await assignUsersToCourse(courses);
   const coursesUsersWithGrades = await assignGradesToStudents(coursesUsers);
-  console.log(coursesUsersWithGrades);
+
+  console.log(coursesUsersWithGrades[0]);
+  // var mailOptions = {
+  //   from: 'wsb@wsb.gda.pl',
+  //   to: '',
+  //   subject: 'Wyniki Seminarium',
+  //   template: 'studentTemplate',
+  //   body: '',
+  // };
+
+  // for (let i = 0; i < Object.keys(coursesUsersWithGrades[0]).length; i++) {
+  //   try {
+  //     coursesUsersWithGrades[0][i].grades[7];
+  //     //console.log(coursesUsersWithGrades[0][i].email);
+  //     if (coursesUsersWithGrades[0][i].grades[7] == 'Spadkowa') {
+  //       mailOptions.to = coursesUsersWithGrades[0][i].email;
+  //       //mailOptions.to.push('wykladowca@wsb.pl');
+  //       mailOptions.subject = 'Wykryto tendencje spadkowa po 2 semestrze';
+  //       mailOptions.body =
+  //         'Witaj ' +
+  //         coursesUsersWithGrades[0][i].fullname +
+  //         ' \n Wykryto tendencje spadkowa ocen po semetrze. Zalecamy zabranie sie do roboty. \n Pozdrawiam';
+  //       console.log(mailOptions);
+  //     }
+  //   } catch (error) {}
+  //   try {
+  //     coursesUsersWithGrades[0][i].grades[12];
+  //     //console.log(coursesUsersWithGrades[0][i].email);
+  //     if (coursesUsersWithGrades[0][i].grades[12] == 'Spadkowa') {
+  //       mailOptions.to = coursesUsersWithGrades[0][i].email;
+  //       mailOptions.subject = 'Wykryto tendencje spadkowa po 3 semestrze';
+  //       mailOptions.body =
+  //         'Witaj ' +
+  //         coursesUsersWithGrades[0][i].fullname +
+  //         ' \n Wykryto tendencje spadkowa ocen po semetrze. Zalecamy zabranie sie do roboty. \n Pozdrawiam';
+  //       console.log(mailOptions);
+  //     }
+  //   } catch (error) {}
+  // }
+  // console.log(coursesUsersWithGrades[0][1].grades[7]);
+  // console.log(coursesUsersWithGrades[0][1]);
 };
 
 await gradesReport();
