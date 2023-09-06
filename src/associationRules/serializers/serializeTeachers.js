@@ -8,7 +8,7 @@ const serializeTeachers = (courses) => {
       return {
         studentName: student.fullname,
         email: student.email,
-        trend: student.grades.filter((grade) => grade.includes('owa')).at(-1) || 'Brak trendu',
+        trend: student.grades.filter((grade) => grade.includes('owa')).at(-1) || 'Brak tendencji',
       };
     });
 

@@ -17,30 +17,36 @@
     </style>
   </head>
   <body>
-    <h1>Witaj {{teacher.fullname}}</h1>
-    <p>
-      Chcieliśmy podzielić się z Panem/Panią informacją o postepach Pania/Pani studentów w ramch
-      przedmiotu
-      {{subject}}.
-    </p>
-
-    <h3>Studenci: </h3>
-
+    <h1>Raport z postępów przedmoitu {{subject}}</h1>
+    <h3>
+      Raport dotyczy studentów prowadzonych przez:
+    </h3>
     <table>
-
       <tr>
         <th>Imię i nazwisko</th>
         <th>Email</th>
-        <th>Tendencja ocen</th>
       </tr>
-
-      {{#each students}}
+      {{#each teachers}}
         <tr>
-          <td>{{this.studentName}}</td>
+          <td>{{this.teacherName}}</td>
           <td>{{this.email}}</td>
-          <td>{{this.trend}}</td>
         </tr>
       {{/each}}
+    </table>
+
+    <h3>Oto tendencje prowadzonych studentów:</h3>
+
+    <table>
+      <tr>
+        <th>Zwyżkowa</th>
+        <th>Spadkowa</th>
+        <th>Brak trendencji</th>
+      </tr>
+      <tr>
+        <td>{{trandsCount.ascendingTrend}}</td>
+        <td>{{trandsCount.descendingTrend}}</td>
+        <td>{{trandsCount.noTrend}}</td>
+      </tr>
     </table>
 
     <br />
