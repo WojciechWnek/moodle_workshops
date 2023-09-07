@@ -10,9 +10,11 @@ const serializeCourses = (courses) => {
       return student.grades.filter((grade) => grade.includes('owa')).at(-1) || 'Brak tendencji';
     });
 
+    console.log(serializedStudents);
+
     const ascendingTrend = serializedStudents.filter((trend) => trend === 'Zwyzkowa').length;
     const descendingTrend = serializedStudents.filter((trend) => trend === 'Spadkowa').length;
-    const noTrend = serializedStudents.filter((trend) => trend === 'Brak tendencj').length;
+    const noTrend = serializedStudents.filter((trend) => trend === 'Brak tendencji').length;
 
     const courseTeachers = course.users.filter((user) => {
       return user.roles.some((role) => role.shortname === 'editingteacher');
