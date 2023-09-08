@@ -14,11 +14,11 @@ const transporter = nodemailer.createTransport({
 const handlebarOptions = {
   viewEngine: {
     extName: '.handlebars',
-    partialsDir: path.resolve('src/associationRules/emails/templates'),
+    partialsDir: path.resolve('src/emails/templates'),
 
     defaultLayout: false,
   },
-  viewPath: path.resolve('src/associationRules/emails/templates'),
+  viewPath: path.resolve('src/emails/templates'),
   extName: '.handlebars',
 };
 

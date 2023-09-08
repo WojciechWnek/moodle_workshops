@@ -1,5 +1,5 @@
-import { postRequest } from '../service.js';
-import { endpoints } from '../endpoints.js';
+import { postRequest } from './service.js';
+import { endpoints } from './endpoints.js';
 
 const getCousresIds = async (phrase) => {
   const response = await postRequest(endpoints.tool_moodlenet_search_courses, {
@@ -64,8 +64,8 @@ const assignGradesToStudents = async (coursesUsers) => {
   return studentsWithGrades;
 };
 
-const gradesReport = async () => {
-  const courses = await getCousresIds('Seminarium_');
+const gradesReport = async (phrase) => {
+  const courses = await getCousresIds(phrase);
   const coursesUsers = await assignUsersToCourse(courses);
   const coursesUsersWithGrades = await assignGradesToStudents(coursesUsers);
   return coursesUsersWithGrades;

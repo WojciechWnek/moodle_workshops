@@ -17,31 +17,12 @@
     </style>
   </head>
   <body>
-    <h1>Witaj {{teacher.fullname}}</h1>
+    <h1>Witaj {{teacher}}</h1>
     <p>
-      Chcieliśmy podzielić się z Panem/Panią informacją o postepach Pania/Pani studentów w ramch
-      przedmiotu
-      {{subject}}.
+      Chcieliśmy podzielić się z Panem/Panią informacją o postepach Pania/Pani studentów.
     </p>
 
-    <h3>Studenci: </h3>
-
-    <table>
-
-      <tr>
-        <th>Imię i nazwisko</th>
-        <th>Email</th>
-        <th>Tendencja ocen</th>
-      </tr>
-
-      {{#each students}}
-        <tr>
-          <td>{{this.studentName}}</td>
-          <td>{{this.email}}</td>
-          <td>{{this.trend}}</td>
-        </tr>
-      {{/each}}
-    </table>
+    <p>Raport w załączeniu.</p>
 
     <br />
     <p>Pozdrawiamy<br />Uniwersytet WSB Merito</p>

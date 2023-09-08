@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 
-const createExcel = async (serializedCourses) => {
+const courseExcel = async (serializedCourses) => {
   const workbook = new ExcelJS.Workbook();
 
   const worksheet = workbook.addWorksheet(`Raport`);
@@ -24,4 +24,4 @@ const createExcel = async (serializedCourses) => {
   return buffer;
 };
 
-export default createExcel;
+export default courseExcel;

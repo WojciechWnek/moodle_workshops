@@ -1,6 +1,6 @@
 import 'dotenv/config';
-// import { buffer } from '../excel/createExcel.js';
-import createExcel from '../excel/createExcel.js';
+// import { buffer } from '../excel/courseExcel.js';
+import courseExcel from '../excel/courseExcel.js';
 
 const serializeCourses = async (courses, mailingList) => {
   const allCourses = courses.map((course) => {
@@ -40,7 +40,7 @@ const serializeCourses = async (courses, mailingList) => {
     return serializedCourses;
   });
 
-  const attachment = await createExcel(allCourses);
+  const attachment = await courseExcel(allCourses);
 
   const filename = 'Raport ' + new Date().toLocaleDateString() + '.xlsx';
 
