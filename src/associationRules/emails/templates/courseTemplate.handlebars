@@ -17,37 +17,9 @@
     </style>
   </head>
   <body>
-    <h1>Raport z postępów przedmoitu {{subject}}</h1>
-    <h3>
-      Raport dotyczy studentów prowadzonych przez:
-    </h3>
-    <table>
-      <tr>
-        <th>Imię i nazwisko</th>
-        <th>Email</th>
-      </tr>
-      {{#each teachers}}
-        <tr>
-          <td>{{this.teacherName}}</td>
-          <td>{{this.email}}</td>
-        </tr>
-      {{/each}}
-    </table>
+    <h1>Raport z postępów studentów Uniwersytetu WSB Merito.</h1>
 
-    <h3>Oto tendencje prowadzonych studentów:</h3>
-
-    <table>
-      <tr>
-        <th>Zwyżkowa</th>
-        <th>Spadkowa</th>
-        <th>Brak trendencji</th>
-      </tr>
-      <tr>
-        <td>{{trandsCount.ascendingTrend}}</td>
-        <td>{{trandsCount.descendingTrend}}</td>
-        <td>{{trandsCount.noTrend}}</td>
-      </tr>
-    </table>
+    <p>Raport w załączeniu.</p>
 
     <br />
     <p>Pozdrawiamy<br />Uniwersytet WSB Merito</p>

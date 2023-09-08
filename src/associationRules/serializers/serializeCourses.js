@@ -1,6 +1,8 @@
 import 'dotenv/config';
+// import { buffer } from '../excel/createExcel.js';
+import createExcel from '../excel/createExcel.js';
 
-const serializeCourses = (courses) => {
+const serializeCourses = async (courses, mailingList) => {
   const allCourses = courses.map((course) => {
     const courseStudents = course.users.filter((user) => {
       return user.grades;
@@ -9,8 +11,6 @@ const serializeCourses = (courses) => {
     const serializedStudents = courseStudents.map((student) => {
       return student.grades.filter((grade) => grade.includes('owa')).at(-1) || 'Brak tendencji';
     });
-
-    console.log(serializedStudents);
 
     const ascendingTrend = serializedStudents.filter((trend) => trend === 'Zwyzkowa').length;
     const descendingTrend = serializedStudents.filter((trend) => trend === 'Spadkowa').length;
@@ -27,25 +27,38 @@ const serializeCourses = (courses) => {
       };
     });
 
-    const mailOptions = {
-      from: 'wsb@wsb.gda.pl',
-      to: process.env.DIDACTIC_DEPARTMENT_EMAIL, // dziekanat.email,
-      subject: `Podsumowanie trendów z przedmoitu ${course.course.courseName}`,
-      template: 'courseTemplate',
-      context: {
-        subject: course.course.courseName,
-        teachers: serializedTeachers,
-        trandsCount: {
-          ascendingTrend: ascendingTrend,
-          descendingTrend: descendingTrend,
-          noTrend: noTrend,
-        },
+    const serializedCourses = {
+      courseName: course.course.courseName,
+      couresTeachers: serializedTeachers,
+      trandsCount: {
+        ascendingTrend: ascendingTrend,
+        descendingTrend: descendingTrend,
+        noTrend: noTrend,
       },
     };
 
-    return mailOptions;
+    return serializedCourses;
   });
-  return allCourses;
+
+  const attachment = await createExcel(allCourses);
+
+  const filename = 'Raport ' + new Date().toLocaleDateString() + '.xlsx';
+
+  const mailOptions = {
+    from: 'wsb@wsb.gda.pl',
+    to: mailingList, // dziekanat.email,
+    subject: `Raport z postępów studentów Uniwersytetu WSB Merito.`,
+    template: 'courseTemplate',
+    attachments: [
+      {
+        filename,
+        content: attachment,
+        contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      },
+    ],
+  };
+
+  return mailOptions;
 };
 
 export default serializeCourses;

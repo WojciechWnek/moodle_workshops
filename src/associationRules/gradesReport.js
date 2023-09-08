@@ -65,7 +65,7 @@ const assignGradesToStudents = async (coursesUsers) => {
 };
 
 const gradesReport = async () => {
-  const courses = await getCousresIds('Seminarium_1');
+  const courses = await getCousresIds('Seminarium_');
   const coursesUsers = await assignUsersToCourse(courses);
   const coursesUsersWithGrades = await assignGradesToStudents(coursesUsers);
   return coursesUsersWithGrades;
