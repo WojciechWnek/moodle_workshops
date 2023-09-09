@@ -58,8 +58,8 @@ const serializeTeachers = async (courses) => {
 
       const mailOptions = {
         from: 'wsb@wsb.gda.pl',
-        to: 'wownek@gmail.com', // teacherData.email,
-        subject: `Raport z postępów studentów na prowadzonych kursach.`,
+        to: process.env.TEST_EMAIL || teacherData.email,
+        subject: `Raport postępów studentów na prowadzonych kursach.`,
         template: 'teacherTemplate',
         context: {
           teacher: teacherData.teacherName,
@@ -72,7 +72,6 @@ const serializeTeachers = async (courses) => {
           },
         ],
       };
-
       return mailOptions;
     })
   );

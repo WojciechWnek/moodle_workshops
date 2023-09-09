@@ -4,22 +4,23 @@ import serializeStudents from './serializers/serializeStudents.js';
 import serializeTeachers from './serializers/serializeTeachers.js';
 import serializeCourses from './serializers/serializeCourses.js';
 
-const init = async () => {
-  const coursesWithGrades = await gradesReport('Seminarium_');
+const courseSearchPhrase = 'Seminarium_1';
+const coursesSummaryRecipients = process.env.TEST_EMAIL || [];
 
-  // const studentEmails = serializeStudents(coursesWithGrades);
+const init = async (searchPhrase, recipients) => {
+  const coursesWithGrades = await gradesReport(searchPhrase);
+
+  const studentEmails = serializeStudents(coursesWithGrades);
   // //Wysyła maile do studentów
-  // studentEmails.forEach((course) => course.forEach((studentOptions) => sendEmail(studentOptions)));
+  studentEmails.forEach((course) => course.forEach((studentOptions) => sendEmail(studentOptions)));
 
   const teachersEmails = await serializeTeachers(coursesWithGrades);
   //Wysyła maile do nauczycieli
   teachersEmails.forEach((teacherOptions) => sendEmail(teacherOptions));
 
-  // const coursesEmail = await serializeCourses(coursesWithGrades, [
-  //   process.env.DIDACTIC_DEPARTMENT_EMAIL,
-  // ]);
+  const coursesEmail = await serializeCourses(coursesWithGrades, recipients);
   //Wysyła maile do działu dydaktycznego
-  // sendEmail(coursesEmail);
+  sendEmail(coursesEmail);
 };
 
-await init();
+await init(courseSearchPhrase, coursesSummaryRecipients);

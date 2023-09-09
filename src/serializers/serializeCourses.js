@@ -46,8 +46,8 @@ const serializeCourses = async (courses, mailingList) => {
 
   const mailOptions = {
     from: 'wsb@wsb.gda.pl',
-    to: mailingList, // dziekanat.email,
-    subject: `Raport z postępów studentów Uniwersytetu WSB Merito.`,
+    to: mailingList,
+    subject: `Raport kursów Uniwersytetu WSB Merito.`,
     template: 'courseTemplate',
     attachments: [
       {

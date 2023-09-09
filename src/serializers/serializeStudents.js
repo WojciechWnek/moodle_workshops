@@ -17,8 +17,8 @@ const serializeStudents = (courses) => {
       if (!student.trend) return;
       return {
         from: 'wsb@wsb.gda.pl',
-        to: 'wownek@gmail.com', // student.email,
-        subject: `Oceny z przedmitu ${student.courseName}`,
+        to: process.env.TEST_EMAIL || student.email,
+        subject: `Tendencja ocen z przedmitu ${student.courseName}`,
         template: student.trend === 'Spadkowa' ? 'studentTemplateBad' : 'studentTemplateGood',
         context: {
           student: { fullname: student.studentName },
