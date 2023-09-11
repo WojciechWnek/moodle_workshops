@@ -1,5 +1,3 @@
-import { postRequest, getRequest } from './service.js';
-import { endpoints } from './endpoints.js';
 import hbs from 'nodemailer-express-handlebars';
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
@@ -16,33 +14,24 @@ const transporter = nodemailer.createTransport({
 const handlebarOptions = {
   viewEngine: {
     extName: '.handlebars',
-    partialsDir: path.resolve('./../views'),
+    partialsDir: path.resolve('src/emails/templates'),
+
     defaultLayout: false,
   },
-  viewPath: path.resolve('./../views'),
+  viewPath: path.resolve('src/emails/templates'),
   extName: '.handlebars',
 };
 
-var mailOptions = {
-  from: 'wsb@wsb.gda.pl',
-  to: 'wownek@gmail.com',
-  subject: 'Wyniki Seminarium',
-  template: 'studentTemplate',
-  context: {
-    student: { firstname: 'Szymon', lastname: 'Zdun' },
-    grades: {
-      subject: 'Seminarium magisterskie',
-      trend: 'spadkowy',
-      grades: [5, 5, 3],
-    },
-  },
-};
 transporter.use('compile', hbs(handlebarOptions));
 
-transporter.sendMail(mailOptions, function (error, info) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+const sendEmail = (mailOptions) => {
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+};
+
+export default sendEmail;

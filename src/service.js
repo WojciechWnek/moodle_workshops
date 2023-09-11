@@ -6,7 +6,6 @@ const baseURL = process.env.API_URL;
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
-    // 'Content-Type': 'application/json',
   },
 };
 

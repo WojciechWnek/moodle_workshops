@@ -48,24 +48,27 @@ const assignGradesToStudents = async (coursesUsers) => {
           if (!res.usergrades) return { ...user, grades: null };
           const grades = res.usergrades[0].gradeitems
             .filter((grade) => grade.itemtype !== 'course')
-            .map((grade) => grade.graderaw / grade.grademax);
+            .map((grade) => grade.gradeformatted);
           return {
             ...user,
             grades: grades,
           };
         })
       );
-      return response;
+      return {
+        course: courseInfo.course,
+        users: response,
+      };
     })
   );
   return studentsWithGrades;
 };
 
-const gradesReport = async () => {
-  const courses = await getCousresIds('Seminarium Magisterskie');
+const gradesReport = async (phrase) => {
+  const courses = await getCousresIds(phrase);
   const coursesUsers = await assignUsersToCourse(courses);
   const coursesUsersWithGrades = await assignGradesToStudents(coursesUsers);
-  console.log(coursesUsersWithGrades);
+  return coursesUsersWithGrades;
 };
 
-await gradesReport();
+export default gradesReport;

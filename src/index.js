@@ -1,49 +1,26 @@
-import { postRequest, getRequest } from './service.js';
-import { endpoints } from './endpoints.js';
-import hbs from 'nodemailer-express-handlebars';
-import nodemailer from 'nodemailer';
-import 'dotenv/config';
-import path from 'path';
+import gradesReport from './gradesReport.js';
+import sendEmail from './emails/sendEmail.js';
+import serializeStudents from './serializers/serializeStudents.js';
+import serializeTeachers from './serializers/serializeTeachers.js';
+import serializeCourses from './serializers/serializeCourses.js';
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_SMTP_USERNAME,
-    pass: process.env.GMAIL_SMTP_PASSWORD,
-  },
-});
+const courseSearchPhrase = 'Seminarium_1';
+const coursesSummaryRecipients = process.env.TEST_EMAIL || [];
 
-const handlebarOptions = {
-  viewEngine: {
-    extName: '.handlebars',
-    partialsDir: path.resolve('./src/views'),
-    defaultLayout: false,
-  },
-  viewPath: path.resolve('./src/views'),
-  extName: '.handlebars',
+const init = async (searchPhrase, recipients) => {
+  const coursesWithGrades = await gradesReport(searchPhrase);
+
+  const studentEmails = serializeStudents(coursesWithGrades);
+  // //Wysyła maile do studentów
+  studentEmails.forEach((course) => course.forEach((studentOptions) => sendEmail(studentOptions)));
+
+  const teachersEmails = await serializeTeachers(coursesWithGrades);
+  //Wysyła maile do nauczycieli
+  teachersEmails.forEach((teacherOptions) => sendEmail(teacherOptions));
+
+  const coursesEmail = await serializeCourses(coursesWithGrades, recipients);
+  //Wysyła maile do działu dydaktycznego
+  sendEmail(coursesEmail);
 };
 
-transporter.use('compile', hbs(handlebarOptions));
-
-var mailOptions = {
-  from: 'wsb@wsb.gda.pl',
-  to: 'wownek@gmail.com',
-  subject: 'Wyniki Seminarium',
-  template: 'studentTemplate',
-  context: {
-    student: { firstname: 'Szymon', lastname: 'Zdun' },
-    grades: {
-      subject: 'Seminarium magisterskie',
-      trend: 'spadkowy',
-      grades: [5, 5, 3],
-    },
-  },
-};
-
-transporter.sendMail(mailOptions, function (error, info) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+await init(courseSearchPhrase, coursesSummaryRecipients);
