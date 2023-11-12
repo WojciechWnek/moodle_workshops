@@ -4,7 +4,8 @@ import serializeStudents from './serializers/serializeStudents.js';
 import serializeTeachers from './serializers/serializeTeachers.js';
 import serializeCourses from './serializers/serializeCourses.js';
 
-const courseSearchPhrase = 'Seminarium_1';
+// const courseSearchPhrase = 'Seminarium_1';
+const courseSearchPhrase = 'INMN4_s1';
 const coursesSummaryRecipients = process.env.TEST_EMAIL || [];
 
 const init = async (searchPhrase, recipients) => {

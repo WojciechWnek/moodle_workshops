@@ -1,6 +1,7 @@
 import 'dotenv/config';
 // import { buffer } from '../excel/courseExcel.js';
 import courseExcel from '../excel/courseExcel.js';
+import findTrend from '../helpers/findTrend.js';
 
 const serializeCourses = async (courses, mailingList) => {
   const allCourses = courses.map((course) => {
@@ -9,7 +10,7 @@ const serializeCourses = async (courses, mailingList) => {
     });
 
     const serializedStudents = courseStudents.map((student) => {
-      return student.grades.filter((grade) => grade.includes('owa')).at(-1) || 'Brak tendencji';
+      return findTrend(student.grades, 'owa');
     });
 
     const ascendingTrend = serializedStudents.filter((trend) => trend === 'Zwyzkowa').length;

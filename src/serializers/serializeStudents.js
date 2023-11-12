@@ -1,3 +1,5 @@
+import findTrend from '../helpers/findTrend.js';
+
 const serializeStudents = (courses) => {
   const allStudents = courses.map((course) => {
     const courseStudents = course.users.filter((user) => {
@@ -9,7 +11,7 @@ const serializeStudents = (courses) => {
         courseName: course.course.courseName,
         studentName: student.fullname,
         email: student.email,
-        trend: student.grades.filter((grade) => grade.includes('owa')).at(-1),
+        trend: findTrend(student.grades, 'owa'),
       };
     });
 
