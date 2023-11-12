@@ -1,4 +1,5 @@
 import teacherExcel from '../excel/teacherExcel.js';
+import findTrend from '../helpers/findTrend.js';
 
 const serializeTeachers = async (courses) => {
   const allTeachers = courses.map((course) => {
@@ -10,7 +11,7 @@ const serializeTeachers = async (courses) => {
       return {
         studentName: student.fullname,
         email: student.email,
-        trend: student.grades.filter((grade) => grade.includes('owa')).at(-1) || 'Brak tendencji',
+        trend: findTrend(student.grades, 'owa'),
       };
     });
 
