@@ -1,9 +1,10 @@
 import { postRequest } from './service.js';
 import { endpoints } from './endpoints.js';
 
-const getCousresIds = async (phrase) => {
-  const response = await postRequest(endpoints.tool_moodlenet_search_courses, {
-    searchvalue: phrase,
+const getCousresIds = async (courseId) => {
+  const response = await postRequest(endpoints.core_course_get_courses_by_field, {
+    field: 'idnumber',
+    value: courseId,
   });
   const courseInfo = response.courses.map((course) => ({
     id: course.id,
@@ -64,8 +65,8 @@ const assignGradesToStudents = async (coursesUsers) => {
   return studentsWithGrades;
 };
 
-const gradesReport = async (phrase) => {
-  const courses = await getCousresIds(phrase);
+const gradesReport = async (courseId) => {
+  const courses = await getCousresIds(courseId);
   const coursesUsers = await assignUsersToCourse(courses);
   const coursesUsersWithGrades = await assignGradesToStudents(coursesUsers);
   return coursesUsersWithGrades;

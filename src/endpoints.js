@@ -1,6 +1,6 @@
 export const endpoints = {
-  //For some given input search for a course that matches
-  tool_moodlenet_search_courses: 'tool_moodlenet_search_courses',
+  //Get courses matching a specific field (id/s, shortname, idnumber, category)
+  core_course_get_courses_by_field: 'core_course_get_courses_by_field',
   //Get enrolled users by course id.
   core_enrol_get_enrolled_users: 'core_enrol_get_enrolled_users',
   //Returns the complete list of grade items for users in a course
