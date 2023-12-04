@@ -5,4 +5,6 @@ export const endpoints = {
   core_enrol_get_enrolled_users: 'core_enrol_get_enrolled_users',
   //Returns the complete list of grade items for users in a course
   gradereport_user_get_grade_items: 'gradereport_user_get_grade_items',
+
+  core_message_send_instant_messages: 'core_message_send_instant_messages',
 };

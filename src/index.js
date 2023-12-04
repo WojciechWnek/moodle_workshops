@@ -3,8 +3,10 @@ import sendEmail from './emails/sendEmail.js';
 import serializeStudents from './serializers/serializeStudents.js';
 import serializeTeachers from './serializers/serializeTeachers.js';
 import serializeCourses from './serializers/serializeCourses.js';
+import sendMessages from './emails/sendMessages.js';
 
-const customCourseId = '143070';
+// const customCourseId = '143070';
+const customCourseId = 'kurs_testowy';
 const coursesSummaryRecipients = [`${process.env.TEST_EMAIL}`] || [];
 
 const init = async (courseId, recipients) => {
@@ -21,6 +23,8 @@ const init = async (courseId, recipients) => {
   const coursesEmail = await serializeCourses(coursesWithGrades, recipients);
   //Wysyła maile do działu dydaktycznego
   sendEmail(coursesEmail);
+
+  // await sendMessages();
 };
 
 await init(customCourseId, coursesSummaryRecipients);

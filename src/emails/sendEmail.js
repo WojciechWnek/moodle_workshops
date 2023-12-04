@@ -11,6 +11,16 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// const transporter = nodemailer.createTransport({
+//   host: process.env.WSB_SMTP_HOST,
+//   port: 465,
+//   secure: true,
+//   auth: {
+//     user: process.env.WSB_SMTP_USERNAME,
+//     pass: process.env.WSB_SMTP_PASSWORD,
+//   },
+// });
+
 const handlebarOptions = {
   viewEngine: {
     extName: '.handlebars',
