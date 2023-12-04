@@ -5,7 +5,7 @@ import serializeTeachers from './serializers/serializeTeachers.js';
 import serializeCourses from './serializers/serializeCourses.js';
 
 const customCourseId = '143070';
-const coursesSummaryRecipients = [`${process.env.TEST_EMAIL}`] || [];
+const coursesSummaryRecipients = process.env.SUMMARY_REPORT_EMAIL || [];
 
 const init = async (courseId, recipients) => {
   const coursesWithGrades = await gradesReport(courseId);
