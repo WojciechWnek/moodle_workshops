@@ -1,21 +1,27 @@
 # Projekt systemu monitorowania i mobilizowania studentów WSB Merito
 
 ## Run with Docker
+
 ### Requirements
+
 - docker
 - docker-compose
 
-### Run 
-- create file '.env'
+### Run
+
+- create file '.env' in your root directory
 - docker-compose build
 - docker-compose up
 
-##  Run directly on your machine
+## Run directly on your machine
+
 ### Install
+
 - node
 - npm
 
 ### Run
-- rename 'example.env' to '.env'
+
+- create file '.env' in your root directory
 - npm i
 - node src/index.js
