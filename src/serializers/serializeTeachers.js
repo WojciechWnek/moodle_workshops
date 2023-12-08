@@ -59,7 +59,7 @@ const serializeTeachers = async (courses) => {
 
       const mailOptions = {
         from: 'wsb@wsb.gda.pl',
-        to: process.env.TEST_EMAIL || teacherData.email,
+        to: process.env.TEACHER_TEST_EMAIL || teacherData.email,
         subject: `Raport postępów studentów na prowadzonych kursach.`,
         template: 'teacherTemplate',
         context: {

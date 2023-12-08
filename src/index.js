@@ -4,12 +4,11 @@ import serializeStudents from './serializers/serializeStudents.js';
 import serializeTeachers from './serializers/serializeTeachers.js';
 import serializeCourses from './serializers/serializeCourses.js';
 
-// const courseSearchPhrase = 'Seminarium_1';
-const courseSearchPhrase = 'INMN4_s1';
-const coursesSummaryRecipients = process.env.TEST_EMAIL || [];
+const customCourseId = process.env.COURSE_ID;
+const coursesSummaryRecipients = process.env.SUMMARY_REPORT_EMAIL || [];
 
-const init = async (searchPhrase, recipients) => {
-  const coursesWithGrades = await gradesReport(searchPhrase);
+const init = async (courseId, recipients) => {
+  const coursesWithGrades = await gradesReport(courseId);
 
   const studentEmails = serializeStudents(coursesWithGrades);
   // //Wysyła maile do studentów
@@ -24,4 +23,4 @@ const init = async (searchPhrase, recipients) => {
   sendEmail(coursesEmail);
 };
 
-await init(courseSearchPhrase, coursesSummaryRecipients);
+await init(customCourseId, coursesSummaryRecipients);
