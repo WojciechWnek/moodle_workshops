@@ -17,7 +17,7 @@
 
 ## Run with Docker
 
-⚠️ Adter every change in `.env` you need to run `docker-compose build` to include new changes
+⚠️ After every change in `.env` you need to run `docker-compose build` to include new changes
 
 ### Requirements
 
