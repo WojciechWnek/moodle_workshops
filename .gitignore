@@ -13,6 +13,7 @@ dist
 dist-ssr
 *.local
 .env
+old.env
 .eslintcache
 coverage/
 # Editor directories and files
