@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import getFormatedDate from '../helpers/getFormatedDate.js';
 
 const teacherExcel = async (teacherData) => {
   const workbook = new ExcelJS.Workbook();
@@ -36,6 +37,14 @@ const teacherExcel = async (teacherData) => {
   worksheet.getColumn(2).width = 20;
   worksheet.getColumn(3).width = 20;
   worksheet.getColumn(4).width = 20;
+
+  worksheet.addRow(['Raport z dnia:', getFormatedDate()]).eachCell((cell) => {
+    cell.fill = headerStyle.fill;
+    cell.font = headerStyle.font;
+    cell.border = headerStyle.border;
+  });
+
+  worksheet.addRow([]);
 
   worksheet.addRow(['Prowadzący:']).eachCell((cell) => {
     cell.fill = headerStyle.fill;

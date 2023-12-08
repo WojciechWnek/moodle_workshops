@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import getFormatedDate from '../helpers/getFormatedDate.js';
 
 const courseExcel = async (serializedCourses) => {
   const workbook = new ExcelJS.Workbook();
@@ -34,6 +35,14 @@ const courseExcel = async (serializedCourses) => {
   worksheet.getColumn(1).width = 20;
   worksheet.getColumn(2).width = 20;
   worksheet.getColumn(3).width = 20;
+
+  worksheet.addRow(['Raport z dnia:', getFormatedDate()]).eachCell((cell) => {
+    cell.fill = headerStyle.fill;
+    cell.font = headerStyle.font;
+    cell.border = headerStyle.border;
+  });
+
+  worksheet.addRow([]);
 
   serializedCourses.forEach((course) => {
     worksheet.addRow(['Kurs:']).eachCell((cell) => {

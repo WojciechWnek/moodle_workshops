@@ -1,5 +1,6 @@
 import teacherExcel from '../excel/teacherExcel.js';
 import findTrend from '../helpers/findTrend.js';
+import getFormatedDate from '../helpers/getFormatedDate.js';
 
 const serializeTeachers = async (courses) => {
   const allTeachers = courses.map((course) => {
@@ -55,7 +56,7 @@ const serializeTeachers = async (courses) => {
     teacherArray.map(async (teacherData) => {
       const attachment = await teacherExcel(teacherData);
 
-      const filename = 'Raport ' + new Date().toLocaleDateString() + '.xlsx';
+      const filename = 'Raport ' + getFormatedDate() + '.xlsx';
 
       const mailOptions = {
         from: 'wsb@wsb.gda.pl',

@@ -2,6 +2,7 @@ import 'dotenv/config';
 // import { buffer } from '../excel/courseExcel.js';
 import courseExcel from '../excel/courseExcel.js';
 import findTrend from '../helpers/findTrend.js';
+import getFormatedDate from '../helpers/getFormatedDate.js';
 
 const serializeCourses = async (courses, mailingList) => {
   const allCourses = courses.map((course) => {
@@ -43,7 +44,7 @@ const serializeCourses = async (courses, mailingList) => {
 
   const attachment = await courseExcel(allCourses);
 
-  const filename = 'Raport ' + new Date().toLocaleDateString() + '.xlsx';
+  const filename = 'Raport ' + getFormatedDate() + '.xlsx';
 
   const mailOptions = {
     from: 'wsb@wsb.gda.pl',
