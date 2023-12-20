@@ -9,6 +9,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.GMAIL_SMTP_USERNAME,
     pass: process.env.GMAIL_SMTP_PASSWORD,
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 const handlebarOptions = {
